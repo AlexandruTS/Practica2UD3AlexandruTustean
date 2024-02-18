@@ -1,3 +1,6 @@
+import GUI.Controlador;
+import GUI.Modelo;
+import GUI.Vista;
 import org.hibernate.HibernateException;
 import org.hibernate.Metamodel;
 import org.hibernate.query.Query;
@@ -10,7 +13,7 @@ import javax.persistence.metamodel.EntityType;
 import java.util.Map;
 
 public class Main {
-    private static final SessionFactory ourSessionFactory;
+   /*private static final SessionFactory ourSessionFactory;
 
     static {
         try {
@@ -43,5 +46,10 @@ public class Main {
         } finally {
             session.close();
         }
-    }
+    }*/
+   public static void main(String[] args) {
+       Vista vista = new Vista();
+       Modelo modelo = new Modelo();
+       Controlador controlador = new Controlador(modelo, vista);
+   }
 }
