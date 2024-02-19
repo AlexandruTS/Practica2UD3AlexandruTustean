@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b48411e8-667d-4ab6-889a-db5cffe113d9" name="Default Changelist" comment="" />
+    <list default="true" id="7d07f1e6-2a9f-4c00-9b50-4dbf954e5296" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,27 +31,25 @@
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="2cUgXHL1eRmJOKBw3RG9AKIkAvj" />
+  <component name="ProjectId" id="2cZlPxJV6hOX3AsHRcdQon2vbTV" />
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
-    <property name="JPA.DatabaseSchemaImportDialog" value="50db016c-dd05-4fd3-8de1-26905e1cdc00" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="375" />
+    <property name="JPA.DatabaseSchemaImportDialog" value="3746f7b2-fb02-4665-886a-3e35106f825b" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Escritorio/Nueva carpeta (3)/TiendaPuzzles" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jgoodies-common-1.8.1.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\alexs\Downloads\Practica2-UD3-AlexandruTustean\lib" />
-    </key>
     <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="base" />
+      <recent name="base.hibernate" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\alexs\Downloads\Practica2-UD3-AlexandruTustean\src\libs" />
+      <recent name="C:\Users\alexs\Downloads\Practica2a-UD3-AlexandruTusteanSirbu\lib" />
+      <recent name="C:\Users\alexs\Downloads\Practica2a-UD3-AlexandruTusteanSirbu\src" />
+      <recent name="C:\Users\alexs\Downloads\Practica2a-UD3-AlexandruTusteanSirbu\src\GUI" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -69,7 +67,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Practica2-UD3-AlexandruTustean" />
+      <module name="Practica2a-UD3-AlexandruTusteanSirbu" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -85,14 +83,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b48411e8-667d-4ab6-889a-db5cffe113d9" name="Default Changelist" comment="" />
-      <created>1708171608426</created>
+      <changelist id="7d07f1e6-2a9f-4c00-9b50-4dbf954e5296" name="Default Changelist" comment="" />
+      <created>1708326960046</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1708171608426</updated>
-      <workItem from="1708171609829" duration="2867000" />
-      <workItem from="1708180721584" duration="4632000" />
-      <workItem from="1708249731466" duration="22838000" />
+      <updated>1708326960046</updated>
+      <workItem from="1708326962554" duration="3123000" />
     </task>
     <servers />
   </component>

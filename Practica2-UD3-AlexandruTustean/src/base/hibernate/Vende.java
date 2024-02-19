@@ -1,17 +1,20 @@
-package base;
+package base.hibernate;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Vende {
     private int id;
-    private int idVenta;
     private int cantidad;
     private double precio;
-    private List<Tienda> tienda;
-    private List<Videojuego> videojuego;
+    private Tienda tienda;
+    private Videojuego videojuego;
+
+    @Override
+    public String toString() {
+        return "cantidad: " + cantidad + " , " + "precio: " + precio + " , " + "tienda: " + tienda.toString() + " , " + "videojuego: " + videojuego.toString();
+    }
 
     @Id
     @Column(name = "id")
@@ -21,16 +24,6 @@ public class Vende {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "idVenta")
-    public int getIdVenta() {
-        return idVenta;
-    }
-
-    public void setIdVenta(int idVenta) {
-        this.idVenta = idVenta;
     }
 
     @Basic
@@ -59,32 +52,34 @@ public class Vende {
         if (o == null || getClass() != o.getClass()) return false;
         Vende vende = (Vende) o;
         return id == vende.id &&
-                idVenta == vende.idVenta &&
                 cantidad == vende.cantidad &&
                 Double.compare(vende.precio, precio) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idVenta, cantidad, precio);
+        return Objects.hash(id, cantidad, precio);
     }
 
-    @ManyToMany(mappedBy = "venta")
-    public List<Tienda> getTienda() {
+    @ManyToOne
+    @JoinColumn(name = "idTienda", referencedColumnName = "id", nullable = false)
+    public Tienda getTienda() {
         return tienda;
     }
 
-    public void setTienda(List<Tienda> tienda) {
+    public void setTienda(Tienda tienda) {
         this.tienda = tienda;
     }
 
-    @ManyToMany
-    @JoinTable(name = "vende", catalog = "", schema = "basejuego", joinColumns = @JoinColumn(name = "idVenta", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "idVideojuego", referencedColumnName = "id", nullable = false))
-    public List<Videojuego> getVideojuego() {
+    @ManyToOne
+    @JoinColumn(name = "idVideojuego", referencedColumnName = "id", nullable = false)
+    public Videojuego getVideojuego() {
         return videojuego;
     }
 
-    public void setVideojuego(List<Videojuego> videojuego) {
+    public void setVideojuego(Videojuego videojuego) {
         this.videojuego = videojuego;
     }
+
+
 }

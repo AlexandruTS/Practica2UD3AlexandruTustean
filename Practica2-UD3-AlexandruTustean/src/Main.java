@@ -13,7 +13,7 @@ import javax.persistence.metamodel.EntityType;
 import java.util.Map;
 
 public class Main {
-   /*private static final SessionFactory ourSessionFactory;
+    /*private static final SessionFactory ourSessionFactory;
 
     static {
         try {
@@ -47,9 +47,9 @@ public class Main {
             session.close();
         }
     }*/
-   public static void main(String[] args) {
-       Vista vista = new Vista();
-       Modelo modelo = new Modelo();
-       Controlador controlador = new Controlador(modelo, vista);
-   }
+    public static void main(String[] args) {
+        Vista vista = new Vista();
+        Modelo modelo = new Modelo();
+        Controlador controlador = new Controlador(modelo, vista);
+    }
 }

@@ -1,8 +1,9 @@
 package GUI;
 
-import base.Tienda;
-import base.Vende;
-import base.Videojuego;
+
+import base.hibernate.Tienda;
+import base.hibernate.Vende;
+import base.hibernate.Videojuego;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -55,7 +56,7 @@ public class Modelo {
 
     ArrayList<Vende> getVentas() {
         Session sesion = sessionFactory.openSession();
-        Query query = sesion.createQuery("FROM vende");
+        Query query = sesion.createQuery("FROM Vende");
         ArrayList<Vende> lista = (ArrayList<Vende>)query.getResultList();
         sesion.close();
         return lista;

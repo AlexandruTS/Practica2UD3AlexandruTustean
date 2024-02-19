@@ -1,4 +1,4 @@
-package base;
+package base.hibernate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -7,13 +7,16 @@ import java.util.Objects;
 @Entity
 public class Tienda {
     private int id;
-    private int idTienda;
     private String nombreTienda;
     private String direccion;
     private int telefono;
     private String correoElectronico;
-    private List<Vende> venta;
-    private List<Videojuego> videojuego;
+    private List<Vende> vende;
+
+    @Override
+    public String toString() {
+        return "nombre: " + nombreTienda + " , " + "direccion: " + direccion + " , " + "telefono: " + telefono + " , " + "correo: " + correoElectronico ;
+    }
 
     @Id
     @Column(name = "id")
@@ -23,16 +26,6 @@ public class Tienda {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "idTienda")
-    public int getIdTienda() {
-        return idTienda;
-    }
-
-    public void setIdTienda(int idTienda) {
-        this.idTienda = idTienda;
     }
 
     @Basic
@@ -81,7 +74,6 @@ public class Tienda {
         if (o == null || getClass() != o.getClass()) return false;
         Tienda tienda = (Tienda) o;
         return id == tienda.id &&
-                idTienda == tienda.idTienda &&
                 telefono == tienda.telefono &&
                 Objects.equals(nombreTienda, tienda.nombreTienda) &&
                 Objects.equals(direccion, tienda.direccion) &&
@@ -90,25 +82,17 @@ public class Tienda {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idTienda, nombreTienda, direccion, telefono, correoElectronico);
+        return Objects.hash(id, nombreTienda, direccion, telefono, correoElectronico);
     }
 
-    @ManyToMany
-    @JoinTable(name = "vende", catalog = "", schema = "basejuego", joinColumns = @JoinColumn(name = "idTienda", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "idVenta", referencedColumnName = "id", nullable = false))
-    public List<Vende> getVenta() {
-        return venta;
+    @OneToMany(mappedBy = "tienda")
+    public List<Vende> getVende() {
+        return vende;
     }
 
-    public void setVenta(List<Vende> venta) {
-        this.venta = venta;
+    public void setVende(List<Vende> vende) {
+        this.vende = vende;
     }
 
-    @ManyToMany(mappedBy = "tienda")
-    public List<Videojuego> getVideojuego() {
-        return videojuego;
-    }
 
-    public void setVideojuego(List<Videojuego> videojuego) {
-        this.videojuego = videojuego;
-    }
 }

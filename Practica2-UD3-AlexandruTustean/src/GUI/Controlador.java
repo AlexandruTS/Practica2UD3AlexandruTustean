@@ -1,8 +1,8 @@
 package GUI;
 
-import base.Tienda;
-import base.Vende;
-import base.Videojuego;
+import base.hibernate.Tienda;
+import base.hibernate.Vende;
+import base.hibernate.Videojuego;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -12,9 +12,8 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import static com.sun.java.accessibility.util.SwingEventMonitor.addListSelectionListener;
 
 public class Controlador implements ActionListener, ListSelectionListener {
 
@@ -68,7 +67,7 @@ public class Controlador implements ActionListener, ListSelectionListener {
                 break;
             case "eliminarVideojuegoBtn":
                 Videojuego eliminarVideojuego = (Videojuego) vista.listVideojuego.getSelectedValue();
-                if(!comprobarVideojuegoVenta(eliminarVideojuego.getIdVideojuego())) {
+                if(!comprobarVideojuegoVenta(eliminarVideojuego.getId())) {
                     JOptionPane.showMessageDialog(null,"este videojuego esta ligado a una venta, debes eliminar la venta priemro",
                             "Error",JOptionPane.ERROR_MESSAGE);
                     break;
@@ -93,7 +92,7 @@ public class Controlador implements ActionListener, ListSelectionListener {
                 break;
             case "eliminarTiendaBtn":
                 Tienda elimniarTienda = (Tienda) vista.listTienda.getSelectedValue();
-                if(!comprobarTiendaVenta(elimniarTienda.getIdTienda())) {
+                if(!comprobarTiendaVenta(elimniarTienda.getId())) {
                     JOptionPane.showMessageDialog(null, "esta tienda esta ligada a una venta, debes eliminar la venta primero",
                             "Error", JOptionPane.ERROR_MESSAGE);
                     break;
@@ -104,16 +103,16 @@ public class Controlador implements ActionListener, ListSelectionListener {
                 Vende nuevaVenta = new Vende();
                 nuevaVenta.setCantidad(Integer.parseInt(vista.cantidadVenta.getText()));
                 nuevaVenta.setPrecio(Double.parseDouble(vista.precioVenta.getText()));
-                nuevaVenta.setTienda((List<Tienda>) vista.tiendaCbx.getSelectedItem());
-                nuevaVenta.setVideojuego((List<Videojuego>) vista.videojuegoCbx.getSelectedItem());
+                nuevaVenta.setTienda((Tienda) vista.tiendaCbx.getSelectedItem());
+                nuevaVenta.setVideojuego((Videojuego) vista.videojuegoCbx.getSelectedItem());
                 modelo.insertar(nuevaVenta);
                 break;
             case "modificarVentaBtn":
                 Vende modificarVenta = (Vende) vista.listVenta.getSelectedValue();
                 modificarVenta.setCantidad(Integer.parseInt(vista.cantidadVenta.getText()));
                 modificarVenta.setPrecio(Double.parseDouble(vista.precioVenta.getText()));
-                modificarVenta.setTienda((List<Tienda>) vista.tiendaCbx.getSelectedItem());
-                modificarVenta.setVideojuego((List<Videojuego>) vista.videojuegoCbx.getSelectedItem());
+                modificarVenta.setTienda((Tienda) vista.tiendaCbx.getSelectedItem());
+                modificarVenta.setVideojuego((Videojuego) vista.videojuegoCbx.getSelectedItem());
                 modelo.modificar(modificarVenta);
                 break;
             case "eliminarVentaBtn":
@@ -128,7 +127,7 @@ public class Controlador implements ActionListener, ListSelectionListener {
     public boolean comprobarVideojuegoVenta(int id){
         for(Vende venta : modelo.getVentas()) {
             Videojuego v = (Videojuego) venta.getVideojuego();
-            if(v.getIdVideojuego() == id){
+            if(v.getId() == id){
                 return false;
             }
         }
@@ -138,7 +137,7 @@ public class Controlador implements ActionListener, ListSelectionListener {
     public boolean comprobarTiendaVenta(int id){
         for (Vende venta : modelo.getVentas()) {
             Tienda t = (Tienda) venta.getTienda();
-            if(t.getIdTienda() == id){
+            if(t.getId() == id){
                 return false;
             }
         }
@@ -173,6 +172,7 @@ public class Controlador implements ActionListener, ListSelectionListener {
     private void actualizar(){
         listarVideojuegos(modelo.getVideojuegos());
         listarTiendas(modelo.getTiendas());
+        listaVentas(modelo.getVentas());
     }
 
     private void listarVideojuegos(ArrayList<Videojuego> lista){
@@ -201,6 +201,12 @@ public class Controlador implements ActionListener, ListSelectionListener {
         vista.videojuegoCbx.setSelectedItem(-1);
     }
 
+    private void listaVentas(ArrayList<Vende> lista){
+        vista.dlmVentas.clear();
+        for (Vende v : lista){
+            vista.dlmVentas.addElement(v);
+        }
+    }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
@@ -210,7 +216,7 @@ public class Controlador implements ActionListener, ListSelectionListener {
                 vista.nombreVideojuego.setText(String.valueOf(videojuegoSeleccionado.getNombreVideojuego()));
                 vista.generoVideojuego.setText(String.valueOf(videojuegoSeleccionado.getGenero()));
                 vista.precioVideojuego.setText(String.valueOf(videojuegoSeleccionado.getPrecio()));
-                vista.fechaLanzamiento.setDate(LocalDate.parse(vista.fechaLanzamiento.getDate().toString()));
+                vista.fechaLanzamiento.setDate(LocalDate.parse((videojuegoSeleccionado.getFechaLanzamiento().toString())));
             }
             if (e.getSource() == vista.listTienda){
                 Tienda tiendaSeleccionada = (Tienda) vista.listTienda.getSelectedValue();

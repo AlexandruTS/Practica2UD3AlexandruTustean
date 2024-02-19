@@ -1,4 +1,4 @@
-package base;
+package base.hibernate;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -8,13 +8,16 @@ import java.util.Objects;
 @Entity
 public class Videojuego {
     private int id;
-    private int idVideojuego;
     private String nombreVideojuego;
     private String genero;
     private double precio;
     private Date fechaLanzamiento;
-    private List<Tienda> tienda;
-    private List<Vende> venta;
+    private List<Vende> vende;
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombreVideojuego +"," + "genero: "+ genero +"," + "precio: " + precio + "," + "fechaLanzamiento: " + fechaLanzamiento;
+    }
 
     @Id
     @Column(name = "id")
@@ -24,16 +27,6 @@ public class Videojuego {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "idVideojuego")
-    public int getIdVideojuego() {
-        return idVideojuego;
-    }
-
-    public void setIdVideojuego(int idVideojuego) {
-        this.idVideojuego = idVideojuego;
     }
 
     @Basic
@@ -82,7 +75,6 @@ public class Videojuego {
         if (o == null || getClass() != o.getClass()) return false;
         Videojuego that = (Videojuego) o;
         return id == that.id &&
-                idVideojuego == that.idVideojuego &&
                 Double.compare(that.precio, precio) == 0 &&
                 Objects.equals(nombreVideojuego, that.nombreVideojuego) &&
                 Objects.equals(genero, that.genero) &&
@@ -91,25 +83,16 @@ public class Videojuego {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idVideojuego, nombreVideojuego, genero, precio, fechaLanzamiento);
+        return Objects.hash(id, nombreVideojuego, genero, precio, fechaLanzamiento);
     }
 
-    @ManyToMany
-    @JoinTable(name = "vende", catalog = "", schema = "basejuego", joinColumns = @JoinColumn(name = "idVideojuego", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "idTienda", referencedColumnName = "id", nullable = false))
-    public List<Tienda> getTienda() {
-        return tienda;
+    @OneToMany(mappedBy = "videojuego")
+    public List<Vende> getVende() {
+        return vende;
     }
 
-    public void setTienda(List<Tienda> tienda) {
-        this.tienda = tienda;
+    public void setVende(List<Vende> vende) {
+        this.vende = vende;
     }
 
-    @ManyToMany(mappedBy = "videojuego")
-    public List<Vende> getVenta() {
-        return venta;
-    }
-
-    public void setVenta(List<Vende> venta) {
-        this.venta = venta;
-    }
 }
